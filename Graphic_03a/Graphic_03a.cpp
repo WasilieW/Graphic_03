@@ -234,17 +234,17 @@ void GenerateDisplayLists()
 	// sprawdzenie czy implementacja biblioteki obsługuje tekstury o wymiarze 256
 	GLint size;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
-	if (size < 256)
+	if (size < 4096)
 	{
 		printf("Rozmiar tekstur mniejszy od 256");
 		exit(0);
 	}
 
 	// dane tekstury
-	GLubyte texture[256 * 3];
+	GLubyte texture[4096 * 3];
 
 	// przygotowanie danych tekstury RGB
-	for (int i = 0; i < 256; i++)
+	for (int i = 0; i < 4096; i++)
 	{
 		texture[3 * i + 0] = i;
 		texture[3 * i + 1] = i;
@@ -276,7 +276,7 @@ void GenerateDisplayLists()
 	glEndList();
 
 	//  przygotowanie danych tekstury LUMINANCE
-	for (int i = 0; i < 128; i++)
+	for (int i = 0; i < 2048; i++)
 	{
 		texture[i] = i * 2;
 	}
@@ -297,7 +297,7 @@ void GenerateDisplayLists()
 	glEndList();
 
 	// przygotowanie danych tekstury INTENSITY
-	for (int i = 0; i < 64; i++)
+	for (int i = 0; i < 1024; i++)
 	{
 		texture[3 * i] = i * 4;
 	}
