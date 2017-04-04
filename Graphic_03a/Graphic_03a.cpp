@@ -236,7 +236,7 @@ void GenerateDisplayLists()
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &size);
 	if (size < 4096)
 	{
-		printf("Rozmiar tekstur mniejszy od 256");
+		printf("Rozmiar tekstur mniejszy od 4096");
 		exit(0);
 	}
 
@@ -246,9 +246,9 @@ void GenerateDisplayLists()
 	// przygotowanie danych tekstury RGB
 	for (int i = 0; i < 4096; i++)
 	{
-		texture[3 * i + 0] = i;
-		texture[3 * i + 1] = i;
-		texture[3 * i + 2] = i;
+		texture[3 * i + 0] = i / 16;
+		texture[3 * i + 1] = i / 16;
+		texture[3 * i + 2] = i / 16;
 	}
 
 	// generowanie identyfikatora listy wyświetlania
@@ -258,7 +258,7 @@ void GenerateDisplayLists()
 	glNewList(TEXTURE_4096_LIST, GL_COMPILE);
 
 	// definiowanie tekstury
-	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, 256, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, 4096, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
 
 	// odło¿enie macierzy modelowania na stos
 	glPushMatrix();
@@ -278,7 +278,7 @@ void GenerateDisplayLists()
 	//  przygotowanie danych tekstury LUMINANCE
 	for (int i = 0; i < 2048; i++)
 	{
-		texture[i] = i * 2;
+		texture[i] = i / 8;
 	}
 
 	// generowanie identyfikatora listy wyświetlania
@@ -288,7 +288,7 @@ void GenerateDisplayLists()
 	glNewList(TEXTURE_2048_LIST, GL_COMPILE);
 
 	// definiowanie tekstury
-	glTexImage1D(GL_TEXTURE_1D, 0, GL_LUMINANCE, 128, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, texture);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_LUMINANCE, 2048, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, texture);
 
 	// nało¿enie tekstury na prostokąt
 	glCallList(RECT_LIST);
@@ -299,7 +299,7 @@ void GenerateDisplayLists()
 	// przygotowanie danych tekstury INTENSITY
 	for (int i = 0; i < 1024; i++)
 	{
-		texture[3 * i] = i * 4;
+		texture[3 * i] = i / 4;
 	}
 
 	// generowanie identyfikatora listy wyświetlania
@@ -309,7 +309,7 @@ void GenerateDisplayLists()
 	glNewList(TEXTURE_1024_LIST, GL_COMPILE);
 
 	// definiowanie tekstury
-	glTexImage1D(GL_TEXTURE_1D, 0, GL_INTENSITY, 64, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_INTENSITY, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
 
 	// odło¿enie macierzy modelowania na stos
 	glPushMatrix();
