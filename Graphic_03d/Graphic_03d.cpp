@@ -80,11 +80,11 @@ GLfloat scale = 1.5;
 
 // identyfikatory tekstur
 
-GLuint GROUND, WOOD, ROOF;
+GLuint GROUND, WOOD, WINDOW, ROOF;
 
 // identyfikatory list wyświetlania
 
-GLint GROUND_LIST, WOOD_LIST, ROOF_LIST;
+GLint GROUND_LIST, WOOD_LIST, WINDOW_LIST, ROOF_LIST;
 
 // filtr pomniejszający
 
@@ -169,6 +169,14 @@ void DisplayScene()
 	glTranslatef(0.0, -0.5, 0.0);
 	glScalef(0.5, 0.5, 0.5);
 	glCallList(WOOD_LIST);
+	glPopMatrix();
+
+	// rysowanie okna domku
+	glBindTexture(GL_TEXTURE_2D, WINDOW);
+	glPushMatrix();
+	glTranslatef(0.0, -0.5, 0.0);
+	glScalef(0.5, 0.5, 0.5);
+	glCallList(WINDOW_LIST);
 	glPopMatrix();
 
 	// rysowanie dachu domku
@@ -398,6 +406,31 @@ void GenerateTextures()
 	// porządki
 	delete[](unsigned char*)pixels;
 
+	// wczytanie tekstury window.tga
+	error = load_targa("window.tga", width, height, format, type, pixels);
+
+	// błąd odczytu pliku
+	if (error == GL_FALSE)
+	{
+		printf("Niepoprawny odczyt pliku window.tga");
+		exit(0);
+	}
+
+	// utworzenie identyfikatora tekstury
+	glGenTextures(1, &WINDOW);
+
+	// dowiązanie stanu tekstury
+	glBindTexture(GL_TEXTURE_2D, WINDOW);
+
+	// włączenie automatycznego generowania mipmap
+	glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+
+	// definiowanie tekstury (z mipmapami)
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, type, pixels);
+
+	// porządki
+	delete[](unsigned char*)pixels;
+
 	// wczytanie tekstury roof_old_rectangle_color.tga
 	error = load_targa("roof_old_rectangle_color.tga", width, height, format, type, pixels);
 
@@ -604,6 +637,228 @@ void GenerateDisplayLists()
 	glEnd();
 
 	// koniec drugiej listy wyświetlania
+	glEndList();
+
+	// generowanie identyfikatora pierwszej listy wyświetlania
+	WINDOW_LIST = glGenLists(1);
+
+	// pierwsza lista wyświetlania - podło¿e
+	glNewList(WINDOW_LIST, GL_COMPILE);
+
+	// czworokąt
+	// druga lista wyświetlania - ściany chatki
+	glNewList(WINDOW_LIST, GL_COMPILE);
+
+	// przednie okno #1
+	// seria trójkątów
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.95, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(-0.4, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-0.4, 0.66, 1.001);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.95, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-0.4, 0.66, 1.001);
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-0.95, 0.66, 1.001);
+	glEnd();
+
+	// przednie okno #2
+	// seria trójkątów
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.3, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.3, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.3, 0.66, 1.001);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.3, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.3, 0.66, 1.001);
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-0.3, 0.66, 1.001);
+	glEnd();
+
+	// przednie okno #3
+	// seria trójkątów
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.4, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.95, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.95, 0.66, 1.001);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.4, -0.33, 1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.95, 0.66, 1.001);
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.4, 0.66, 1.001);
+	glEnd();
+
+	//--------------------------------
+	// tylnie okno #1
+	// seria trójkątów
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.95, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(-0.4, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-0.4, 0.66, -1.001);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.95, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-0.4, 0.66, -1.001);
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-0.95, 0.66, -1.001);
+	glEnd();
+
+	// tylnie okno #2
+	// seria trójkątów
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.3, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.3, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.3, 0.66, -1.001);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-0.3, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.3, 0.66, -1.001);
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-0.3, 0.66, -1.001);
+	glEnd();
+
+	// tylnie okno #3
+	// seria trójkątów
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.4, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.95, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.95, 0.66, -1.001);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.4, -0.33, -1.001);
+
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.95, 0.66, -1.001);
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.4, 0.66, -1.001);
+	glEnd();
+
+	//--------------------------------
+	// prawe okno #1
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(1.001, 0.66, 0.2);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(1.001, 0.66, 0.8);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(1.001, -0.33, 0.8);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(1.001, 0.66, 0.2);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(1.001, -0.33, 0.8);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(1.001, -0.33, 0.2);
+	glEnd();
+
+	// prawe okno #2
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(1.001, 0.66, -0.2);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(1.001, 0.66, -0.8);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(1.001, -0.33, -0.8);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(1.001, 0.66, -0.2);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(1.001, -0.33, -0.8);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(1.001, -0.33, -0.2);
+	glEnd();
+
+	//--------------------------------
+	// lewe okno #1
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-1.001, 0.66, 0.2);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(-1.001, 0.66, 0.8);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-1.001, -0.33, 0.8);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-1.001, 0.66, 0.2);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-1.001, -0.33, 0.8);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-1.001, -0.33, 0.2);
+	glEnd();
+
+	// lewe okno #2
+	glBegin(GL_TRIANGLES);
+
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-1.001, 0.66, -0.2);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(-1.001, 0.66, -0.8);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-1.001, -0.33, -0.8);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(-1.001, 0.66, -0.2);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(-1.001, -0.33, -0.8);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-1.001, -0.33, -0.2);
+	glEnd();
+
+	// koniec pierwszej listy wyświetlania
 	glEndList();
 
 	// generowanie identyfikatora trzeciej listy wyświetlania
