@@ -639,159 +639,101 @@ void GenerateDisplayLists()
 	// koniec drugiej listy wyświetlania
 	glEndList();
 
-	// generowanie identyfikatora pierwszej listy wyświetlania
+	// okna
 	WINDOW_LIST = glGenLists(1);
 
-	// pierwsza lista wyświetlania - podło¿e
-	glNewList(WINDOW_LIST, GL_COMPILE);
-
-	// czworokąt
 	// druga lista wyświetlania - ściany chatki
 	glNewList(WINDOW_LIST, GL_COMPILE);
 
-	// przednie okno #1
 	// seria trójkątów
 	glBegin(GL_TRIANGLES);
 
+	// przednie okno #1
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.95, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(-0.4, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(-0.4, 0.66, 1.001);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.95, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(-0.4, 0.66, 1.001);
-
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-0.95, 0.66, 1.001);
-	glEnd();
 
 	// przednie okno #2
-	// seria trójkątów
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.3, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(0.3, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.3, 0.66, 1.001);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.3, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.3, 0.66, 1.001);
-
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-0.3, 0.66, 1.001);
-	glEnd();
 
 	// przednie okno #3
-	// seria trójkątów
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(0.4, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(0.95, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.95, 0.66, 1.001);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(0.4, -0.33, 1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.95, 0.66, 1.001);
-
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(0.4, 0.66, 1.001);
-	glEnd();
 
 	//--------------------------------
 	// tylnie okno #1
-	// seria trójkątów
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.95, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(-0.4, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(-0.4, 0.66, -1.001);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.95, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(-0.4, 0.66, -1.001);
-
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-0.95, 0.66, -1.001);
-	glEnd();
 
 	// tylnie okno #2
-	// seria trójkątów
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.3, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(0.3, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.3, 0.66, -1.001);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-0.3, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.3, 0.66, -1.001);
-
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-0.3, 0.66, -1.001);
-	glEnd();
 
 	// tylnie okno #3
-	// seria trójkątów
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(0.4, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(0.95, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.95, 0.66, -1.001);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(0.4, -0.33, -1.001);
-
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.95, 0.66, -1.001);
-
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(0.4, 0.66, -1.001);
-	glEnd();
 
 	//--------------------------------
-	// prawe okno #1
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(1.001, 0.66, 0.2);
 	glTexCoord2f(1.0, 0.0);
@@ -804,11 +746,8 @@ void GenerateDisplayLists()
 	glVertex3f(1.001, -0.33, 0.8);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(1.001, -0.33, 0.2);
-	glEnd();
 
 	// prawe okno #2
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(1.001, 0.66, -0.2);
 	glTexCoord2f(1.0, 0.0);
@@ -821,12 +760,9 @@ void GenerateDisplayLists()
 	glVertex3f(1.001, -0.33, -0.8);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(1.001, -0.33, -0.2);
-	glEnd();
 
 	//--------------------------------
 	// lewe okno #1
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-1.001, 0.66, 0.2);
 	glTexCoord2f(1.0, 0.0);
@@ -839,11 +775,8 @@ void GenerateDisplayLists()
 	glVertex3f(-1.001, -0.33, 0.8);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-1.001, -0.33, 0.2);
-	glEnd();
 
 	// lewe okno #2
-	glBegin(GL_TRIANGLES);
-
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(-1.001, 0.66, -0.2);
 	glTexCoord2f(1.0, 0.0);
